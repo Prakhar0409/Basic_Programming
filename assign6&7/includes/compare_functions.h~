@@ -1,0 +1,1 @@
+void compare(char plain_text[N],char decrypt_plain_text[N], int length_of_input);

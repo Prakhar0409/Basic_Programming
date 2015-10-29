@@ -1,0 +1,26 @@
+#makefile
+
+path =-I ../includes
+CFLAGS=-c
+Obj=main.o matrix_functions.o map_functions.o print_functions.o compare_functions.o
+
+all: $(Obj)
+	g++ -o encrypt $(path) $(Obj)
+
+main.o: main.cpp
+	g++ $(CFLAGS) $(path) main.cpp
+
+matrix_functions.o: matrix_functions.cpp 
+	g++ $(CFLAGS) $(path) matrix_functions.cpp
+
+map_functions.o: map_functions.cpp 
+	g++ $(CFLAGS) $(path) map_functions.cpp
+
+print_functions.o: print_functions.cpp 
+	g++ $(CFLAGS) $(path) print_functions.cpp
+
+compare_functions.o: compare_functions.cpp 
+	g++ $(CFLAGS) $(path) compare_functions.cpp
+
+clean:
+	rm $(Obj) encrypt

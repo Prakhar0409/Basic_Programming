@@ -1,0 +1,30 @@
+#makefile
+
+
+VPATH=	src
+path =-I ../includes
+src_path=-I ./src
+CFLAGS=-c
+Obj=src/main.o src/matrix_functions.o src/map_functions.o src/print_functions.o src/compare_functions.o
+
+
+all: $(Obj)
+	g++ -o encrypt $(path) $(Obj)
+
+main.o: src/main.cpp
+	g++ $(CFLAGS) $(path) src/main.cpp -o src/main.o
+
+matrix_functions.o: src/matrix_functions.cpp 
+	g++ $(CFLAGS) $(path) src/matrix_functions.cpp -o src/matrix_functions.o
+
+map_functions.o: src/map_functions.cpp 
+	g++ $(CFLAGS) $(path) src/map_functions.cpp -o src/map_functions.o
+
+print_functions.o: print_functions.cpp 
+	g++ $(CFLAGS) $(path) src/print_functions.cpp -o src/print_functions.o
+
+compare_functions.o: compare_functions.cpp 
+	g++ $(CFLAGS) $(path) src/compare_functions.cpp -o src/compare_functions.o
+
+clean:
+	rm -f $(Obj) encrypt
