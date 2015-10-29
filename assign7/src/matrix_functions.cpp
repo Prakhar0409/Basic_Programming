@@ -1,0 +1,120 @@
+#include <iostream> 	// Allows input output operations
+#include <iomanip>
+#include<math.h>
+
+#include "matrix_functions.h"
+
+using namespace std;
+
+#define N           200
+#define ARRAY_SIZE  (N*N)
+#define M           100 
+
+/*******************************************************************************
+* Function Name  : determinant
+* Description    : Given a square matrix array[][]. Calculates determinant. 
+* Input          : array,order
+* Output         : Determinant  
+* Return         : determinant value(type float)
+* Example        : Order = 2 
+Array [ 3 2   ]   -> Returns 5.3000
+      [ 2 3.1 ]     
+
+ *******************************************************************************/
+float determinant(float array[N][N],float order)
+{
+	if(order==1)return array[0][0];
+		else if(order==2)return array[0][0]*array[1][1]-array[1][0]*array[0][1];
+		else{
+			float det=0;
+			float A[N][N];
+			for(int i=0;i<order;i++)
+			{
+				for(int a=0;a<i;a++)
+				{
+					for(int b=1;b<order;b++)
+					{
+						A[a][b-1]=array[a][b];
+					}
+				}
+				for(int a=i+1;a<order;a++)
+				{
+					for(int b=1;b<order;b++)
+					{
+						A[a-1][b-1]=array[a][b];
+					}
+				}
+				if(i%2==0)
+				{
+					det+=array[i][0]*determinant(A,order-1);
+				}
+				else{
+					det+=(-1)*array[i][0]*determinant(A,order-1);
+				}
+			}
+			return det;
+		}
+
+}
+
+/*******************************************************************************
+* Function Name  : inverse
+* Description    : Given a square matrix array[][]. Calculates inverse_array. 
+* Input          : array,order
+* Output         : inv
+* Return         : None
+* Example        : Order = 2 
+
+Array [ 3 2 ]   -> inv [  (3/5)   (-2/5)  ]
+      [ 2 3 ]          [  (-2/5)  (3/5)   ]
+ 
+*******************************************************************************/
+
+
+void inverse(float inv[N][N],float array[N][N],float order)
+{
+	if(order==1)inv[0][0]=1/array[0][0];
+		else{
+			float cofactor[N][N];
+			float det=determinant(array,order);
+			for(int i=0;i<order;i++)
+			{
+				for(int j=0;j<order;j++)
+				{
+					for(int a=0;a<i;a++)
+					{
+						for(int b=0;b<j;b++)
+						{
+							cofactor[a][b]=array[a][b];
+						}
+						for(int b=j+1;b<order;b++)
+						{
+							cofactor[a][b-1]=array[a][b];
+						}
+					}
+					for(int a=i+1;a<order;a++)
+					{
+						for(int b=0;b<j;b++)
+						{
+							cofactor[a-1][b]=array[a][b];
+						}
+						for(int b=j+1;b<order;b++)
+						{
+							cofactor[a-1][b-1]=array[a][b];
+						}
+					}
+					if((i+j)%2==0)
+					{
+						inv[i][j]=determinant(cofactor,order-1);
+					}
+					else{
+						inv[i][j]=(-1)*determinant(cofactor,order-1);
+					}
+					inv[i][j]/=det;
+				}
+			}
+		}
+
+}
+
+
