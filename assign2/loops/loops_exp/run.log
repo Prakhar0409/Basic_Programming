@@ -1,0 +1,37 @@
+test4: PASSED
+Given input
+3
+-1.9
+Got output: 
+x = 
+Error = 
+INVALID INPUT
+test1: PASSED
+Given input
+4
+2
+Got output: 
+x = 
+Error = 
+exp(4) = 53.43175
+Number of Terms : 9
+test3: PASSED
+Given input
+5
+2
+Got output: 
+x = 
+Error = 
+exp(5) = 147.6038
+Number of Terms : 12
+test2: PASSED
+Given input
+-1
+0.0001
+Got output: 
+x = 
+Error = 
+exp(-1) = 0.3678819
+Number of Terms : 9
+TESTS_PASSED: 4
+TESTS_FAILED: 0
